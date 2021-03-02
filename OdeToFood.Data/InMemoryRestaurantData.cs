@@ -1,14 +1,12 @@
 ﻿using OdeToFood.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OdeToFood.Data
 {
     public class InMemoryRestaurantData : IRestaurantData
     {
-        private IEnumerable<Restaurant> restaurants;
+        private IList<Restaurant> restaurants;
 
         public InMemoryRestaurantData()
         {
@@ -28,6 +26,30 @@ namespace OdeToFood.Data
         public Restaurant GetById(int id)
         {
             return restaurants.SingleOrDefault(_ => _.Id == id);
+        }
+
+        public Restaurant Add(Restaurant newRestaurant)
+        {
+            newRestaurant.Id = restaurants.Max(_ => _.Id) + 1;
+            restaurants.Add(newRestaurant);
+            return newRestaurant;
+        }
+
+        public Restaurant Update(Restaurant updatedRestaurant)
+        {
+            var restaurant = restaurants.SingleOrDefault(_ => _.Id == updatedRestaurant.Id);
+            if(restaurant != null)
+            {
+                restaurant.Name = updatedRestaurant.Name;
+                restaurant.Location = updatedRestaurant.Location;
+                restaurant.Cuisine = updatedRestaurant.Cuisine;
+            }
+            return restaurant;
+        }
+
+        public int Commit()
+        {
+            return 0;
         }
     }
 }
