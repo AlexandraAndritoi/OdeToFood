@@ -1,0 +1,8 @@
+bin
+obj
+.vs
+../obj
+../OdeToFood.Core/bin/
+../OdeToFood.Core/obj/
+../OdeToFood.Data/bin/
+../OdeToFood.Date/obj/
