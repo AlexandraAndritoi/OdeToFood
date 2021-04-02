@@ -1,0 +1,1 @@
+**Pluralsight course**: ASP.NET Core Fundamental
